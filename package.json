@@ -1,0 +1,22 @@
+{
+  "name": "render-markdown-tables",
+  "version": "1.0.0",
+  "description": "Render Gitlab flavored markdown tables in the browser.",
+  "main": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc ; uglifyjs dist/lib.js -c -m -o dist/lib.js & uglifyjs dist/index.js -c -m -o dist/index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "rehype-stringify": "^10.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "unified": "^11.0.4"
+  }
+}

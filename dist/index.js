@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.renderMarkdownTable=exports.isMarkdownTable=void 0;var lib_1=require("./lib");Object.defineProperty(exports,"isMarkdownTable",{enumerable:!0,get:function(){return lib_1.isMarkdownTable}}),Object.defineProperty(exports,"renderMarkdownTable",{enumerable:!0,get:function(){return lib_1.renderMarkdownTable}});
