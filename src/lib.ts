@@ -8,8 +8,8 @@ import { unified } from "unified";
 
 /** Trims whitespace, including zero-width spaces, from the start and end of a
  * string. */
-function trim(text?: string) {
-  return text?.replace(/(^(\s|\u200B)+)|((\s|\u200B)+$)/g, "");
+function trim<Text extends string | undefined>(text: Text) {
+  return text?.replace(/(^(\s|\u200B)+)|((\s|\u200B)+$)/g, "") as Text;
 }
 
 /**
@@ -60,7 +60,7 @@ export async function renderMarkdownTable(element: Element) {
       .process(trim(text));
 
     // Replace the elements contents with the table html
-    element.innerHTML = String(result)
+    element.innerHTML = trim(String(result))
       // Trim whitespace from table cells
       .replace(/((?<=<t(d|h)[^>]*>)\s+)|(\s+(?=<\/t(d|h)>))/g, "");
   }
