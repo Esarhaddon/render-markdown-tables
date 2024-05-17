@@ -2,6 +2,8 @@ import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeRaw from "rehype-raw";
 import { unified } from "unified";
 
 /** Trims whitespace, including zero-width spaces, from the start and end of a
@@ -14,7 +16,6 @@ function trim(text?: string) {
  * Retrieves the element's text with the `selectNodeContents` range method.
  */
 function getText(element: Element) {
-  console.log({ element });
   const range = new Range();
   const selection = getSelection();
 
@@ -25,7 +26,6 @@ function getText(element: Element) {
   const text = selection?.toString();
   selection?.empty();
 
-  console.log({ text });
   return text;
 }
 
@@ -36,7 +36,6 @@ function getText(element: Element) {
 export function isMarkdownTable(element: Element) {
   const text = getText(element);
   const parsed = unified().use(remarkParse).use(remarkGfm).parse(trim(text));
-  console.log("parsed:", JSON.stringify(parsed, null, 2));
   return parsed.children[0]?.type === "table" && parsed.children.length === 1;
 }
 
@@ -51,7 +50,12 @@ export async function renderMarkdownTable(element: Element) {
     const result = await unified()
       .use(remarkParse)
       .use(remarkGfm)
-      .use(remarkRehype)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      // IMPORTANT: rehypeRaw and rehypeSanitize must be used to sanitize html
+      // input
+      // - https://github.com/remarkjs/remark-rehype?tab=readme-ov-file#example-supporting-html-in-markdown-properly
+      .use(rehypeRaw)
+      .use(rehypeSanitize)
       .use(rehypeStringify)
       .process(trim(text));
 
