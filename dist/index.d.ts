@@ -1,1 +1,1 @@
-export { isMarkdownTable, renderMarkdownTable } from "./lib";
+export { isMarkdownTable, renderMarkdownTable } from "./lib.js";
