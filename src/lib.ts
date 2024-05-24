@@ -59,7 +59,7 @@ export async function renderMarkdownTable(element: Element) {
       .use(rehypeStringify)
       .process(trim(text));
 
-    // Replace the elements contents with the table html
+    // Replace the element's contents with the table html
     element.innerHTML = trim(String(result))
       // Trim whitespace from table cells
       .replace(/((?<=<t(d|h)[^>]*>)\s+)|(\s+(?=<\/t(d|h)>))/g, "");
