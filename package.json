@@ -1,6 +1,6 @@
 {
   "name": "render-markdown-tables",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Render Gitlab flavored markdown tables in the browser",
   "type": "module",
   "exports": "./index.js",
